@@ -1,0 +1,2 @@
+aiosqlite==0.21.0
+bleak==0.22.3

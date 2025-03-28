@@ -1,0 +1,15 @@
+[Unit]
+Description=Mijia Logger
+After=network.target
+
+[Service]
+Type=simple
+User=sandr0
+WorkingDirectory=/home/sandr0/mijia
+ExecStart=/home/sandr0/mijia/logger.py
+Restart=always
+RestartSec=5
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target
