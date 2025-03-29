@@ -1,0 +1,28 @@
+{{ range . }}
+<div class="box">
+    <div class="ba">
+        <i
+            title="{{ .BatteryLevel }}%"
+            class="icon fa fa-solid fa-fw {{ .BatteryIcon }}"
+        ></i>
+    </div>
+    <h2 title="{{ .Mac }}">{{ .Loc }}</h2>
+    <div
+        class="temp{{ if lt .Temp 0.0 }} blue{{ else if gt .Temp 25.0 }} red{{ end }}"
+    >
+        {{ .Temp }}°C<br />
+        <span class="small" title="{{ .DewPointText }}"
+            >({{ .DewPointText }}: {{ .DewPoint }}°C)</span
+        >
+    </div>
+    <div
+        class="hum{{ if or (lt .Humidity 40.0) (gt .Humidity 70.0) }} red{{ end }}"
+    >
+        {{ .Humidity }}%<br />
+        <span class="small" title="Absolute Humidity"
+            >{{ .AbsHum }} g/m&#xb3;</span
+        >
+    </div>
+    <div class="time" title="{{ .Timestamp }}">{{ .TimeRelative }}</div>
+</div>
+{{ end }}

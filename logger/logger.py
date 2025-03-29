@@ -3,6 +3,8 @@
 import asyncio
 import json
 import logging
+import os
+import pathlib
 import struct
 from typing import Any
 
@@ -11,9 +13,14 @@ from bleak.backends.device import BLEDevice
 from bleak.backends.scanner import AdvertisementData
 import aiosqlite
 
+# so execution is not dependent on directory but only the structure in the git
+file_path = pathlib.Path(os.path.dirname(__file__))
+log_dir = file_path / ".." / "logs"
+config_dir = file_path / ".."
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(
-    filename="error.log",
+    filename=file_path / "error.log",
     format="%(asctime)s %(levelname)s: %(message)s",
     encoding="utf-8",
     level=logging.INFO,
@@ -54,7 +61,7 @@ async def callback(device: BLEDevice, advertising_data: AdvertisementData):
 
     if config[mac]["counter"] != counter:
         # new event, store to db
-        async with aiosqlite.connect(f"{mac}.db") as db:
+        async with aiosqlite.connect(log_dir / f"{mac}.db") as db:
             await db.execute(
                 "INSERT INTO sensor_data (temp, humidity, battery_mv, battery_level) VALUES (?, ?, ?, ?)",
                 (
@@ -76,7 +83,7 @@ async def main():
 
     for mac in config:
         config[mac]["counter"] = 0
-        async with aiosqlite.connect(f"{mac}.db") as db:
+        async with aiosqlite.connect(log_dir / f"{mac}.db") as db:
             await db.execute("""
                 CREATE TABLE IF NOT EXISTS sensor_data (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -97,7 +104,7 @@ async def main():
 
 
 if __name__ == '__main__':
-    with open("config.json", "r", encoding="utf-8") as f:
+    with open(config_dir / "config.json", "r", encoding="utf-8") as f:
         config = json.loads(f.read())
 
     asyncio.run(main())

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Temparatur and Humidity</title>
+        <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            rel="stylesheet"
+            href="/static/fontawesome/css/fontawesome.min.css"
+        />
+    </head>
+    <body>
+        <div class="container">
+            <h1>Mijia Data</h1>
+
+            <div
+                id="mijia-data"
+                hx-get="/load_data"
+                hx-trigger="load, every 5s"
+                hx-swap="innerHTML"
+            >
+                <!-- HTMX will load table rows dynamically here -->
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,12 +1,12 @@
 [Unit]
-Description=Mijia Logger
+Description=Mijia Server
 After=network.target
 
 [Service]
 Type=simple
 User=sandr0
-WorkingDirectory=/home/sandr0/mijia
-ExecStart=/home/sandr0/mijia/logger.py
+WorkingDirectory=/home/sandr0/mijia/server
+ExecStart=/home/sandr0/mijia/server/mijia_server
 Restart=always
 RestartSec=5
 Environment="PYTHONUNBUFFERED=1"

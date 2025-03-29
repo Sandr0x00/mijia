@@ -1,5 +1,4 @@
 *.db
 /graphs/
 /gui/
-/logs/
 /config.json

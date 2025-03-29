@@ -1,0 +1,74 @@
+body {
+    color: #dddddd;
+    background-color: #00060e;
+}
+#mijia-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.highlight {
+    fill: #1a84ff;
+}
+.navbar,
+footer,
+.box {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+h2 {
+    margin: 0;
+    margin-bottom: 1em;
+    line-break: auto;
+    word-wrap: break-all;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+}
+.box {
+    background: #333;
+    margin: 0.5em;
+    padding: 1em 2em;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: auto;
+    font-size: 1.4em;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0fr;
+    grid-template-areas:
+        "hd hd ba"
+        "te hu hu"
+        "ti ti ti";
+}
+.box h2 {
+    grid-area: hd;
+}
+.small {
+    font-size: small;
+}
+.temp {
+    grid-area: te;
+}
+.hum {
+    grid-area: hu;
+}
+.ba {
+    grid-area: ba;
+    text-align: right;
+}
+.time {
+    grid-area: ti;
+    text-align: right;
+    font-size: small;
+}
+.red {
+    color: #f44;
+}
+.green {
+    color: #4f4;
+}
+.yellow {
+    color: #ff4;
+}
+.blue {
+    color: #5dd;
+}
